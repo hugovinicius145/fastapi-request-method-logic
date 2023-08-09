@@ -8,7 +8,7 @@ BOOKS = [
   {'title': 'Title Three', 'author': 'Author Three', 'category': 'history'},
   {'title': 'Title Four', 'author': 'Author Four', 'category': 'math'},
   {'title': 'Title Five', 'author': 'Author Five', 'category': 'math'},
-  {'title': 'Title Six', 'author': 'Author Six', 'category': 'math'},
+  {'title': 'Title Six', 'author': 'Author Two', 'category': 'math'},
 ]
 
 @app.get("/books")
@@ -30,6 +30,16 @@ async def read_category_by_query(category: str):
     if book.get('category').casefold() == category.casefold():
       books_to_return.append(book)
   return books_to_return
+
+
+@app.get("/books/byauthor/")
+async def read_books_by_author_path(author: str):
+  books_to_return = []
+  for book in BOOKS:
+    if book.get('author').casefold() == author.casefold():
+      books_to_return.append(book)
+
+  return books_to_return    
 
 
 @app.get("/books/{book_author}/")
